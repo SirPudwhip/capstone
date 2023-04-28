@@ -16,11 +16,11 @@ const theStore = createStore( userReducer )
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store = {theStore}>
     <BrowserRouter>
+    <Provider store = {theStore}>
     <App />
-    </BrowserRouter>
     </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

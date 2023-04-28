@@ -1,4 +1,4 @@
-
+import {Outlet, Link} from 'react-router-dom'
 
 function NavBar() {
     return(
@@ -6,7 +6,7 @@ function NavBar() {
   <div
     class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8"
   >
-    <a class="block text-teal-600" href="/">
+    <Link class="block text-teal-600" to="/">
       <span class="sr-only">Home</span>
       <svg
         class="h-8"
@@ -19,7 +19,7 @@ function NavBar() {
           fill="currentColor"
         />
       </svg>
-    </a>
+    </Link>
 
     <div class="flex flex-1 items-center justify-end md:justify-between">
       <nav aria-label="Site Nav" class="hidden md:block">
@@ -64,19 +64,18 @@ function NavBar() {
 
       <div class="flex items-center gap-4">
         <div class="sm:flex sm:gap-4">
-          <a
+          <Link
             class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-            href="/login"
+            to='/login'
           >
             Login
-          </a>
+          </Link>
 
-          <a
+          <Link to="/signup"
             class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-            href="/signup"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
 
         <button
@@ -101,6 +100,7 @@ function NavBar() {
       </div>
     </div>
   </div>
+  <Outlet />
 </header>
 
     )

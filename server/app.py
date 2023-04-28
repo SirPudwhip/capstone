@@ -50,10 +50,10 @@ class Login(Resource):
         session.permanent = True
         session['user.id'] = user.id
             
-        return make_response({
+        return make_response(jsonify({
             'username': user.username,
             'email': user.email
-        }, 200)
+        }), 200)
 
 api.add_resource(Login, '/login')
         

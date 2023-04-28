@@ -1,11 +1,11 @@
 
 const initialState = 'SQUEAK'
 
-export const userReducer = (state=initialState, action) => {
+export const userReducer = (state='false', action) => {
 
     switch(action.type) {
         case 'squeak/change': 
-            return 'NOT SQUEAK'
+            return 'true'
 
         default: return state
     }
