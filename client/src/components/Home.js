@@ -15,7 +15,7 @@ function Home () {
 
     const homeList = vidList.map((v) => {
         console.log(v)
-        return <VideoCard key = {v.id} name = {v.name} description={v.description} link={v.link}/>
+        return <VideoCard key = {v.id} name = {v.name} description={v.description} id={v.id} link={v.link}/>
     })
     
     return(

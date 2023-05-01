@@ -99,6 +99,8 @@ class ClearSession(Resource):
         session['user_id'] = None
         return make_response({}, 204)
 
+api.add_resource(ClearSession, '/logout')
+
 
 class CreateUser(Resource):
     def get(self): 

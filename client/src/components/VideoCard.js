@@ -1,13 +1,13 @@
 import ReactPlayer from 'react-player'
+import {Link} from 'react-router-dom'
 
 
-function VideoCard({description, link, name}) {
 
-    console.log(description, link, name)
+function VideoCard({description, link, name, id}) {
 
 
     return(
-        <div class="max-w-sm rounded border-1 ">
+        <Link class="max-w-sm rounded border-1 " to={`/video/${id}`}>
             <div class="px-4 py-8">
             <ReactPlayer url ={link}/>
                 <div class="font-bold text-xl mb-2">{name}</div>
@@ -20,7 +20,7 @@ function VideoCard({description, link, name}) {
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
             </div>
-        </div>
+        </Link>
     )
 }
 

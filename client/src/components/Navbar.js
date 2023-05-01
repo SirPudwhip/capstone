@@ -1,6 +1,37 @@
 import {Outlet, Link} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 function NavBar() {
+
+  const stateValue = useSelector(s => {
+    return s
+  })
+
+  console.log(stateValue)
+
+  let handleClick = () => {
+    console.log("clicked remove!")
+
+    fetch(`/logout`, {
+        method: 'DELETE',
+      })
+    }
+
+  const loginB = () => {
+    <Link
+        class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+            to = '/login'>
+    </Link>
+  }
+
+  const logoutB = () => {
+    <button
+        class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+          onClick = {handleClick}>
+    </button>
+  }
+
+
     return(
         <header aria-label="Site Header" class="bg-white">
   <div
@@ -64,18 +95,36 @@ function NavBar() {
 
       <div class="flex items-center gap-4">
         <div class="sm:flex sm:gap-4">
-          <Link
+
+        {
+        stateValue ? 
+
+          <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+          onClick = {handleClick} href='/'>
+            Logout
+          </a>
+       : 
+        <Link
             class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-            to='/login'
-          >
+          to = '/login'>
             Login
+        </Link> 
+        
+        }
+
+        {
+          stateValue ? 
+          <Link to='/profile' class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
+            Profile
           </Link>
 
-          <Link to="/signup"
-            class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-          >
-            Sign Up
+          :
+
+          <Link to='/signup' class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
+          Sign Up
           </Link>
+        }
+
         </div>
 
         <button
@@ -102,8 +151,7 @@ function NavBar() {
   </div>
   <Outlet />
 </header>
+)}
 
-    )
-}
 
 export default NavBar
