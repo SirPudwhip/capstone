@@ -22,7 +22,6 @@ app.config['MEDIA_DEFAULT_ENDPOINT'] = 'default'
 app.config['MEDIA_DEFAULT_URL'] = 'https://ih1.redbubble.net/image.2924701484.4363/flat,750x,075,f-pad,750x1000,f8f8f8.jpg'
 app.json.compact = False
 
-
 migrate = Migrate(app, db)
 db.init_app(app)
 bcrypt = Bcrypt(app)
@@ -34,13 +33,25 @@ class Home(Resource):
 
 api.add_resource(Home, '/')
 
-# class VideobyID(Resource): 
-#     def get(self):
-#         video = Video.query.filter(Video.id == id).first()
+class Videos(Resource):
+    def get(self): 
+        video_list = []
+        for v in Video.query.all(): 
+            vid = v.to_dict()
+            video_list.append(vid)
 
+        return make_response(video_list, 200)
 
-# api.add_resource(Video, '/video/<int:id>')
+api.add_resource(Videos, '/videos')
 
+class VideobyID(Resource):
+    def get(self, id):
+        video = Video.query.filter(Video.id == id).first()
+        vid_obj = video.to_dict()
+
+        return make_response(vid_obj, 200)
+
+api.add_resource(VideobyID, '/videos/<int:id>')
 
 
 class Login(Resource):
@@ -75,6 +86,8 @@ class CheckSession(Resource):
             return user.to_dict(), 200
 
         return make_response({}, 404)
+
+api.add_resource(CheckSession, '/checksession')
 
 class ClearSession(Resource):
     def delete(self):
