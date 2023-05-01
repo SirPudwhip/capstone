@@ -1,13 +1,18 @@
+import ReactPlayer from 'react-player'
 
 
-function VideoCard() {
+function VideoCard({description, link, name}) {
+
+    console.log(description, link, name)
+
+
     return(
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains" />
-            <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+        <div class="max-w-sm rounded border-1 ">
+            <div class="px-4 py-8">
+            <ReactPlayer url ={link}/>
+                <div class="font-bold text-xl mb-2">{name}</div>
                     <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                        {description}
                     </p>
                 </div>
                 <div class="px-6 pt-4 pb-2">

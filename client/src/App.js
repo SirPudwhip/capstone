@@ -7,9 +7,23 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Video from './components/Video'
 import {useEffect} from 'react';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+
 
 function App() {
+
+  const dispatch = useDispatch()
+  const theAction = {type: 'squeak/change'}
+
+  useEffect(() => {
+    fetch('/checksession')
+    .then((response) => {
+      if(response.status==200) {
+          dispatch(theAction)
+      }
+      else return response.json();
+    })
+  },[])
 
   const stateValue = useSelector(s => {
       return s

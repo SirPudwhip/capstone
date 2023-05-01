@@ -37,7 +37,12 @@ class Videos(Resource):
     def get(self): 
         video_list = []
         for v in Video.query.all(): 
-            vid = v.to_dict()
+            vid = {
+                'name': v.name, 
+                'description': v.description,
+                'link': v.link,
+                'id':v.id,
+            }
             video_list.append(vid)
 
         return make_response(video_list, 200)
@@ -68,7 +73,7 @@ class Login(Resource):
             return make_response({"error": "Incorrect password"}, 404)
 
         session.permanent = True
-        session['user.id'] = user.id
+        session['user_id'] = user.id
             
         return make_response(jsonify({
             'username': user.username,
