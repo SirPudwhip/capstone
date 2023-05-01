@@ -25,9 +25,9 @@ function NavBar() {
       <nav aria-label="Site Nav" class="hidden md:block">
         <ul class="flex items-center gap-6 text-sm">
           <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="/">
-              About
-            </a>
+            <Link class="text-gray-500 transition hover:text-gray-500/75" to="/video">
+              Video
+            </Link>
           </li>
 
           <li>

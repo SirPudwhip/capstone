@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from flask_media import Media
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from models import db, User
+from models import db, User, Video
 from flask_bcrypt import Bcrypt
 import secrets 
 
@@ -33,6 +33,15 @@ class Home(Resource):
         return jsonify({'message': 'Welcome to my shitty website '})
 
 api.add_resource(Home, '/')
+
+# class VideobyID(Resource): 
+#     def get(self):
+#         video = Video.query.filter(Video.id == id).first()
+
+
+# api.add_resource(Video, '/video/<int:id>')
+
+
 
 class Login(Resource):
     def post(self):

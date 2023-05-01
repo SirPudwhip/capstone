@@ -5,6 +5,7 @@ import {Routes, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Video from './components/Video'
 import {useEffect} from 'react';
 import {useSelector} from 'react-redux'
 
@@ -22,6 +23,7 @@ function App() {
             <Route path = '/' element={<Home />} />
             <Route path = '/login' element={<Login />} />
             <Route path = '/signup' element={<Signup />} />
+            <Route path = '/video/:id' element={<Video />}/>
         </Routes>
     </div>
   );

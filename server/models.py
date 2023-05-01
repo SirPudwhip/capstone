@@ -12,17 +12,20 @@ class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable = False)
+    link = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable= False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
 
     username = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False)
-    _password_hash = db.Column(db.String, nullable=False)
-    confirmation_pw = db.Column(db.String, nullable=False)
+    email = db.Column(db.String)
+    _password_hash = db.Column(db.String)
+    confirmation_pw = db.Column(db.String)
 
     @hybrid_property
     def password_hash(self):
@@ -30,7 +33,7 @@ class User(db.Model):
 
     @password_hash.setter
     def password_hash(self, password):
-        password_hash -= bcrypt.generate_password_hash(
+        password_hash = bcrypt.generate_password_hash(
             password.encode('utf-8')
         )
         self._password_hash = password_hash.decode('utf-8')

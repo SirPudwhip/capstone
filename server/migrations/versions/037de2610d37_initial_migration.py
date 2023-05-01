@@ -1,8 +1,8 @@
-"""adding the User and Video
+"""initial migration
 
-Revision ID: 7c4022798a35
-Revises: d87d4700dae3
-Create Date: 2023-04-26 16:12:41.981111
+Revision ID: 037de2610d37
+Revises: 
+Create Date: 2023-05-01 09:44:31.155839
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7c4022798a35'
-down_revision = 'd87d4700dae3'
+revision = '037de2610d37'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -21,14 +21,17 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
-    sa.Column('email', sa.String(), nullable=False),
-    sa.Column('_password_hash', sa.String(), nullable=False),
-    sa.Column('confirmation_pw', sa.String(), nullable=False),
+    sa.Column('email', sa.String(), nullable=True),
+    sa.Column('_password_hash', sa.String(), nullable=True),
+    sa.Column('confirmation_pw', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('videos',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(), nullable=True),
+    sa.Column('name', sa.String(), nullable=False),
+    sa.Column('description', sa.String(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
