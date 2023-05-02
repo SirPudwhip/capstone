@@ -58,6 +58,23 @@ class Videos(Resource):
 
         return make_response(video_list, 200)
 
+    def post(self):
+        id = session['user_id']
+        data = request.get_json()
+        new_vid = Video(
+            name = data['name'],
+            description = data['description'],
+            link = data['link'],
+            user_id = id
+        )
+
+        db.session.add(new_vid)
+        db.session.commit()
+
+        return make_response(new_vid.to_dict(), 201) 
+
+
+
 api.add_resource(Videos, '/videos')
 
 class VideobyID(Resource):

@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Video from './components/Video'
 import Profile from './components/Profile'
+import PostVideo from './components/PostVideo'
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -40,6 +41,7 @@ function App() {
             <Route path = '/signup' element={<Signup />} />
             <Route path = '/video/:id' element={<Video />}/>
             <Route path = '/profile' element={<Profile />}/>
+            <Route path = '/postvideo' element={<PostVideo />} />
         </Routes>
     </div>
   );
