@@ -38,7 +38,7 @@ class UserbyID(Resource):
         user_id = session['user_id']
         this_user = User.query.filter(User.id == user_id).first()
         if this_user: 
-            return make_response({'message': f'this is user {user_id} - {this_user}'}, 200)
+            return make_response(this_user.to_dict(), 200)
         else: 
             return make_response({'dne':'please log in'}, 404)
 
@@ -66,6 +66,32 @@ class VideobyID(Resource):
         vid_obj = video.to_dict()
 
         return make_response(vid_obj, 200)
+
+    def patch(self, id): 
+        data = request.get_json()
+        video = Video.query.filter(Video.id == id).first()
+
+        for attr in data: 
+            setattr(video, attr, data[attr])
+
+        db.session.add(video)
+        db.session.commit()
+
+        return make_response(video.to_dict(), 200)
+
+    def delete(self, id): 
+        video = Video.query.filter(Video.id == id).first()
+
+        if video == None: 
+            response = make_response({'error': 'Video Not Found'}, 404)
+
+        else: 
+            db.session.delete(video)
+            db.session.commit()
+
+            response = make_response({}, 204)
+
+        return response
 
 api.add_resource(VideobyID, '/videos/<int:id>')
 

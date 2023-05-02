@@ -12,6 +12,8 @@ db = SQLAlchemy()
 class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
 
+    serialize_rules = ('-user_id',)
+
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
     link = db.Column(db.String, nullable=False)
@@ -21,12 +23,18 @@ class Video(db.Model, SerializerMixin):
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
+
+    serialize_rules = ('-videos.user', '-_password_hash', '-confirmation_pw')
+
     id = db.Column(db.Integer, primary_key = True)
 
     username = db.Column(db.String, nullable=False)
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
     confirmation_pw = db.Column(db.String)
+
+    videos = db.relationship('Video', backref='user')
+
 
     @hybrid_property
     def password_hash(self):

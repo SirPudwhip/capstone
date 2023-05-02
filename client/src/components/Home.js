@@ -14,12 +14,11 @@ function Home () {
     }, [])
 
     const homeList = vidList.map((v) => {
-        console.log(v)
         return <VideoCard key = {v.id} name = {v.name} description={v.description} id={v.id} link={v.link}/>
     })
     
     return(
-        <div class='grid grid-cols-3 gap-3	'>
+        <div class='grid grid-cols-3 gap-3'>
             {homeList}
         </div>
     ) 
