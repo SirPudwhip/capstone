@@ -20,7 +20,7 @@ function Profile() {
     let vidList = null; 
     console.log(userData.videos)
 
-    let changeProp = (e) => {
+    let changeProp = () => {
         console.log("this is firing")
         setMySwitch(!mySwitch)
     }

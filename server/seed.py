@@ -1,9 +1,11 @@
 from app import app
-from models import db, User, Video
+from models import db, User, Video, Comment
+from faker import Faker
+import random 
 
+fake = Faker()
 
 with app.app_context(): 
-
 
     Video.query.delete()
     db.session.commit()
@@ -69,4 +71,20 @@ with app.app_context():
         user_id= 2 )
 
     db.session.add_all([v1, v2, v3, v4, v5, v6, v7, v8, v9, v10])
+    db.session.commit()
+
+
+    Comment.query.delete()
+    db.session.commit()
+
+    comments = []
+    for i in range(20):
+        c = Comment(
+            user_id = random.randint(1,2),
+            video_id = random.randint(1,10),
+            content = fake.sentence()
+        )
+        comments.append(c)
+
+    db.session.add_all(comments)
     db.session.commit()

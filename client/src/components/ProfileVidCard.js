@@ -19,8 +19,10 @@ function ProfileVidCard({video, changeProp}) {
         console.log('delete clicked')
 
         fetch(`/videos/${video.id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         })
+        .then(r => r.json())
+        .then(console.log)
         changeProp()
     }
     

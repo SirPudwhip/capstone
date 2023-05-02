@@ -8,17 +8,29 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 db = SQLAlchemy()
 
+class Comment(db.Model, SerializerMixin): 
+    __tablename__ = 'comments'
+
+    serialize_rules = ('-user_id', '-video_id')
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    video_id = db.Column(db.Integer, db.ForeignKey('videos.id'))
+    content = db.Column(db.String, nullable=False)
+
 
 class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
 
-    serialize_rules = ('-user_id',)
+    serialize_rules = ('-user_id', '-user', '-comments.video', '-comments.id')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
     link = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable= False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    comments = db.relationship('Comment', backref='video')
     
 
 class User(db.Model, SerializerMixin):
