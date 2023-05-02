@@ -33,6 +33,17 @@ class Home(Resource):
 
 api.add_resource(Home, '/')
 
+class UserbyID(Resource): 
+    def get(self):
+        user_id = session['user_id']
+        this_user = User.query.filter(User.id == user_id).first()
+        if this_user: 
+            return make_response({'message': f'this is user {user_id} - {this_user}'}, 200)
+        else: 
+            return make_response({'dne':'please log in'}, 404)
+
+api.add_resource(UserbyID, '/profile')
+
 class Videos(Resource):
     def get(self): 
         video_list = []
