@@ -11,7 +11,7 @@ db = SQLAlchemy()
 class Comment(db.Model, SerializerMixin): 
     __tablename__ = 'comments'
 
-    serialize_rules = ('-user_id', '-video_id')
+    serialize_rules = ('-user_id', '-video_id', '-user.videos', '-user.comments' )
 
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -22,7 +22,7 @@ class Comment(db.Model, SerializerMixin):
 class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
 
-    serialize_rules = ('-user_id', '-user', '-comments.video', '-comments.id')
+    serialize_rules = ('-user_id', '-comments.video', '-user')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
@@ -45,6 +45,7 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     confirmation_pw = db.Column(db.String)
 
+    comments = db.relationship('Comment', backref='user')
     videos = db.relationship('Video', backref='user')
 
 
