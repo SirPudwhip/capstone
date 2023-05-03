@@ -3,12 +3,18 @@ import ReactPlayer from 'react-player'
 import {useState, useEffect} from 'react'
 import VideoCard from './VideoCard'
 import ComObj from './ComObj'
+import {useSelector} from 'react-redux'
+
 
 
 function Video() {
     const { id } = useParams()
     const [video, setVideo] = useState({})
     const [formData, setFormData] = useState('')
+
+    const stateValue = useSelector(s => {
+      return s
+    })
 
     useEffect(() => {
       fetch(`/videos/${id}`)
@@ -41,7 +47,9 @@ function Video() {
         })
       })
       .then(r=>r.json())
-      .then(console.log)
+      .then(data => {
+        setVideo({...video, comments: [...video.comments, data]})
+      })
     }
 
     return (
@@ -49,7 +57,7 @@ function Video() {
         <ReactPlayer url ={video.link}/>
         <h1>{video.name}</h1>
         <h2>{video.description}</h2>
-          <div>
+          <div hidden = {stateValue? false : true}>
               <form onChange={handleChange} onSubmit={submitCom}>
                   <label>Add a comment?</label>
                   <input placeholder="input comment here" name="comment"></input>

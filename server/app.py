@@ -80,15 +80,22 @@ api.add_resource(Videos, '/videos')
 class Comments(Resource):
     def post(self): 
         data = request.get_json()
+        try: 
+            id = session['user_id']
+
+        except KeyError:
+            return make_response({'error': 'log in '})
+
         try:
             new_comment = Comment(
-                user_id = session['user_id'],
+                user_id = id,
                 video_id = data['video_id'],
                 content = data['content']
             )
         except KeyError: 
             return make_response({'error': '400: Validation error. Please ensure you are logged in'})
-        
+        except ValueError: 
+            return make_response({'error': '400: Validation error. Please actually insert a comment'})
         db.session.add(new_comment)
         db.session.commit()
 

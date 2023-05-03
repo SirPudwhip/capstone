@@ -14,11 +14,16 @@ class Comment(db.Model, SerializerMixin):
     serialize_rules = ('-user_id', '-video_id', '-user.videos', '-user.comments' )
 
     id = db.Column(db.Integer, primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    video_id = db.Column(db.Integer, db.ForeignKey('videos.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    video_id = db.Column(db.Integer, db.ForeignKey('videos.id'), nullable=False)
     content = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
+    @validates('content')
+    def check_content(self, key, content):
+        if 0 < len(content) < 140:
+            return content
+        raise ValueError("You must keep it to 140 characters or less")
 
 class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
