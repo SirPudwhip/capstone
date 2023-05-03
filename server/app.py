@@ -79,15 +79,13 @@ api.add_resource(Videos, '/videos')
 
 class Comments(Resource):
     def post(self): 
-        id = session['user_id']
         data = request.get_json()
         try:
             new_comment = Comment(
-                user_id = id,
+                user_id = session['user_id'],
                 video_id = data['video_id'],
                 content = data['content']
             )
-
         except KeyError: 
             return make_response({'error': '400: Validation error. Please ensure you are logged in'})
         
