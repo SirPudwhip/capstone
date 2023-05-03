@@ -17,6 +17,7 @@ class Comment(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     video_id = db.Column(db.Integer, db.ForeignKey('videos.id'))
     content = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
 
 class Video(db.Model, SerializerMixin):

@@ -24,11 +24,20 @@ function Video() {
         })
     } 
 
+    const submitCom = (e) => {
+      e.preventDefault()
+      console.log("comment submitted")
+      fetch('/comment')
+    }
+
     return (
       <div>
         <ReactPlayer url ={video.link}/>
         <h1>{video.name}</h1>
         <h2>{video.description}</h2>
+          <div>
+
+          </div>
           <div >
             {comList}
           </div>

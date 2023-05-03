@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from flask_media import Media
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from models import db, User, Video
+from models import db, User, Video, Comment
 from flask_bcrypt import Bcrypt
 import secrets 
 
@@ -76,6 +76,30 @@ class Videos(Resource):
 
 
 api.add_resource(Videos, '/videos')
+
+class Comments(Resource):
+    def post(self): 
+        id = session['user_id']
+        data = request.get_json()
+        try:
+            new_comment = Comment(
+                user_id = id,
+                video_id = data['video_id'],
+                content = data['content']
+            )
+
+        except KeyError: 
+            return make_response({'error': '400: Validation error. Please ensure you are logged in'})
+        
+        db.session.add(new_comment)
+        db.session.commit()
+
+        latest_comment = Comment.query.order_by(Comment.created_at.desc()).all()
+        new = latest_comment[0]
+
+        return make_response(new.to_dict(), 200)
+
+api.add_resource(Comments, '/comments')
 
 class VideobyID(Resource):
     def get(self, id):
