@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-function PostVideo() {
+function PostVideo({modUserData}) {
     const [formData, setFormData] = useState({
         name: "",
         description: "", 
@@ -38,9 +38,9 @@ function PostVideo() {
     }
 
     return (
-        <form onChange={handleChange} onSubmit = {submitMod} href='/profile'>
+        <form onChange={handleChange} onSubmit = {submitMod}>
         <div class='text-lg font-semibold'>
-            Please Update Your Video: 
+            Please Post your new Video 
         </div>
         <div class="mb-6">
             <label>Video Name</label>

@@ -42,7 +42,7 @@ class Video(db.Model, SerializerMixin):
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-videos.user', '-_password_hash', '-confirmation_pw')
+    serialize_rules = ('-videos.user', '-_password_hash', '-confirmation_pw', 'commented_videos', '-commented_videos.comments', 'unique_commented_vids', '-unique_commented_vids.comments')
 
     id = db.Column(db.Integer, primary_key = True)
 
@@ -54,6 +54,11 @@ class User(db.Model, SerializerMixin):
     comments = db.relationship('Comment', backref='user')
     videos = db.relationship('Video', backref='user')
 
+    commented_videos = association_proxy('comments', 'video')
+
+    @hybrid_property
+    def unique_commented_vids(self):
+        return list(set(self.commented_videos))
 
     @hybrid_property
     def password_hash(self):

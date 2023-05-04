@@ -33,9 +33,9 @@ function App() {
   })
 
   return (
-    <div class='bg-charcoal-dark'>
-        {/* <NavBar/> */}
-        <NewNav />
+    <div className='bg-charcoal-dark'>
+        <NavBar/>
+        {/* <NewNav /> */}
         <h1>{stateValue}</h1>
         <Routes>
             <Route path = '/' element={<Home />} />

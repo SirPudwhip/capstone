@@ -73,40 +73,40 @@ function ProfileVidCard({video, changeProp}) {
     <div>
         {
             !showMod ? 
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{cardName}</div>
-                    <p class="text-gray-700 text-base">
+            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">{cardName}</div>
+                    <p className="text-gray-700 text-base">
                     {cardDescription}
                     </p>
-                    <p class="text-gray-700 text-base">
+                    <p className="text-gray-700 text-base">
                         LINK: 
                         {cardLink}
                     </p>
-                    <button onClick={handleMod}class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
-                    <button onClick={handleDel}class="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-lightRed"> delete </button>
+                    <button onClick={handleMod}className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
+                    <button onClick={handleDel}className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-lightRed"> delete </button>
                 </div>
             </div>
 
             :
             
             <form onSubmit = {submitMod}>
-                <div class='text-lg font-semibold'>
+                <div className='text-lg font-semibold'>
                     Please Update Your Video: 
                 </div>
-                <div class="mb-6">
+                <div className="mb-6">
                     <label>{cardName}</label>
                     <input placeholder="input new name" name="name"></input>
                 </div>
-                <div class="mb-6">
+                <div className="mb-6">
                     <label>{cardDescription}</label>
                     <input placeholder="input new description" name="description"></input>
                 </div>
-                <div class="mb-6">
+                <div className="mb-6">
                     <label>{cardLink}</label>
                     <input placeholder="input new link" name="link"></input>
                 </div>
-                <button type="submit" class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
+                <button type="submit" className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
             </form>
 
         }

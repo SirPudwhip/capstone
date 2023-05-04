@@ -168,12 +168,12 @@ api.add_resource(Login, '/login')
 
 class CheckSession(Resource):
     def get(self):
-        user_id = session['user_id']
+        user_id = session.get('user_id')
         if user_id: 
             user = User.query.filter(User.id == user_id).first()
             return user.to_dict(), 200
 
-        return make_response({}, 404)
+        return make_response({}, 401)
 
 api.add_resource(CheckSession, '/checksession')
 
@@ -212,7 +212,7 @@ class CreateUser(Resource):
         return make_response({
             'id': new_user.id,
             'email': new_user.email,
-        }, 204)
+        }, 201)
         
 api.add_resource(CreateUser, '/createuser')
 
