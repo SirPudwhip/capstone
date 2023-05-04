@@ -53,19 +53,18 @@ function Video() {
     }
 
     return (
-      <div>
-        <ReactPlayer url ={video.link}/>
-        <h1>{video.name}</h1>
-        <h2>{video.description}</h2>
-          <div hidden = {stateValue? false : true}>
-              <form onChange={handleChange} onSubmit={submitCom}>
+      <div class = 'h-screen bg-gradient-to-t from-blue to-charcoal-light to-40%'>
+          <div class='container mx-auto'>
+          <ReactPlayer url ={video.link}/>
+          <h1 class='font-semibold text-xl text-blue'>{video.name}</h1>
+          <h2 class='text-blue font-medium'>{video.description}</h2>
+          </div>
+                <form hidden = {stateValue? false : true} onChange={handleChange} onSubmit={submitCom}>
                   <label>Add a comment?</label>
                   <input placeholder="input comment here" name="comment"></input>
-              </form>
-          </div>
-          <div >
-            {comList}
-          </div>
+                </form>
+              {comList}
+
       </div>
     )
 } 
