@@ -7,18 +7,15 @@ function VideoCard({description, link, name, id}) {
 
 
     return(
-        <Link class="max-w-sm rounded border-1 " to={`/video/${id}`}>
-            <div class="px-4 py-8">
-            <ReactPlayer url ={link}/>
-                <div class="font-bold text-xl mb-2">{name}</div>
-                    <p class="text-gray-700 text-base">
+        <Link class="p-4 mx-auto border border-blue rounded-3xl" to={`/video/${id}`}>
+            <div class=''>
+            <ReactPlayer width={'100%'} url ={link}/>
+            </div>
+            <div class='px-4 py-2 text-center'>
+                <div class="text-lg text-blue font-bold">{name}</div>
+                    <p class="text-blue font-semibold mt-2">
                         {description}
                     </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
             </div>
         </Link>
     )

@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Video from './components/Video'
 import Profile from './components/Profile'
+import NewNav from './components/NewNav'
 import PostVideo from './components/PostVideo'
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
@@ -32,8 +33,9 @@ function App() {
   })
 
   return (
-    <div class='bg-light-gray'>
-        <NavBar/>
+    <div class='bg-charcoal-dark'>
+        {/* <NavBar/> */}
+        <NewNav />
         <h1>{stateValue}</h1>
         <Routes>
             <Route path = '/' element={<Home />} />
