@@ -15,7 +15,8 @@ module.exports = {
       'violet': '#805E73',
       'gray' : '#4E4D5C',
       'light-gray':"#6C7D87",
-      'orange': "#FFA500"
+      'orange': "#FFA500",
+      'transparent': 'transparent'
     },
     extend: {},
   },
