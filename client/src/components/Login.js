@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 
 function Login() {
@@ -8,6 +9,8 @@ function Login() {
         email: "",
         password: "",
     })
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -40,6 +43,8 @@ function Login() {
             else return response.json();
           })
           .then(console.log);
+        
+        navigate('/')
           
     }
 

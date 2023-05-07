@@ -33,13 +33,13 @@ function NewNav() {
           </Link>
         </div>
         <div className="hidden md:flex">
-          <Link className=" p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/video">
+          <Link className=" p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/search">
             Search
           </Link>
-          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/video">
+          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/creator">
             Content Creator Info
           </Link>
-          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4" to="/video">
+          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4" to="/updates">
             Developer Updates
           </Link>
         </div>
@@ -78,15 +78,15 @@ function NewNav() {
             <span className="hamburger-bottom"></span>
           </button>
         </div>
-        <div className={isOpen? 'absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md' : 'hidden'}>
-          <div className='absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'>
-          <Link className=" p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/video">
+        <div className={isOpen? 'absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold sm:w-auto sm:self-center left-6 right-6 drop-shadow-md' : 'hidden'}>
+          <div className='absolute flex rounded-3xl flex-col bg-blue items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'>
+          <Link className=" p-2 text-charcoal-dark font-medium text-lg mx-6 hover:rounded-full hover:border-charcoal-dark border-2 border-transparent px-4 " to="/video">
             Search
           </Link>
-          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/video">
+          <Link className="p-2 text-charcoal-dark font-medium text-lg mx-6 hover:rounded-full hover:border-charcoal-dark border-2 border-transparent px-4 " to="/video">
             Content Creator Info
           </Link>
-          <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4" to="/video">
+          <Link className="p-2 text-charcoal-dark font-medium text-lg mx-6 hover:rounded-full hover:border-charcoal-dark border-2 border-transparent px-4" to="/video">
             Developer Updates
           </Link> 
           </div>

@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 function Signup() {
 
@@ -15,6 +16,8 @@ function Signup() {
         setFormData({...formData, [name]:value})
     }
 
+    const navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -30,8 +33,9 @@ function Signup() {
                 'confirmation_pw': formData.confirmation_pw
             })
         })
-
+        alert('you have made your account!')
         e.target.reset()
+        navigate('/login')
     }
 
     return(
