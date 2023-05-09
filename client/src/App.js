@@ -48,7 +48,6 @@ function App() {
             <Route path = '/profile' element={<Profile />}/>
             <Route path = '/postvideo' element={<PostVideo />} />
             <Route path ='/search/' element= {<Search />}/>
-            <Route path ='/creator' element= {<Creator />}/>
             <Route path ='/updates' element= {<Updates />}/>
         </Routes>
     </div>

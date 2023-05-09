@@ -31,8 +31,16 @@ function PostVideo({modUserData}) {
                 'link': formData['link']
             })
         })
-        .then(r => r.json())
+        .then(response => {
+            if (!response.ok){
+                throw new Error('bad response from server')
+            }
+            return response.json()
+        })
         .then(console.log)
+        .catch(error => {
+            console.log('error', error)
+        })
 
         navigate('/profile')
     }
@@ -54,7 +62,7 @@ function PostVideo({modUserData}) {
             <label>Video Link</label>
             <input placeholder="input new link" name="link"></input>
         </div>
-        <button type="submit" class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
+        <button type="submit" class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> SUBMIT </button>
     </form>
     ) 
 }

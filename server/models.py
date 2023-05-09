@@ -11,7 +11,7 @@ db = SQLAlchemy()
 class Comment(db.Model, SerializerMixin): 
     __tablename__ = 'comments'
 
-    serialize_rules = ('-user_id', '-video_id', '-user.videos', '-user.comments' )
+    serialize_rules = ( )
 
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -28,21 +28,40 @@ class Comment(db.Model, SerializerMixin):
 class Video(db.Model, SerializerMixin):
     __tablename__ = 'videos'
 
-    serialize_rules = ('-user_id', '-comments.video', '-user')
+    serialize_rules = ('comments', 'user', '-comments.video', '-user.videos','-associated-users', '-user.commented_videos', '-user.unique_commented_vids', '-user.comments', 'unique_associated_users', '-unique_associated_users.videos','-unique_associated_users.comments', '-unique_associated_users.unique_commented_vids')
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key = True) 
     name = db.Column(db.String, nullable = False)
     link = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable= False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     comments = db.relationship('Comment', backref='video')
+
+    associated_users = association_proxy('comments', 'user')
+    
+    @hybrid_property
+    def unique_associated_users(self):
+        return list(set(self.associated_users))
+
+    @validates('link')
+    def check_link(self, key, link):
+        if 'youtube.com' in link: 
+            return link
+        raise ValueError('please include this as a YOUTUBE link')
+
+    @validates('name')
+    def check_link(self, key, name):
+        if ['shit', 'fuck', 'damn', 'crap', 'hell'] in name: 
+            return link
+        raise ValueError('please no vulgarity')
+    
     
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ('-videos.user', '-_password_hash', '-confirmation_pw', 'commented_videos', '-commented_videos.comments', 'unique_commented_vids', '-unique_commented_vids.comments')
+    serialize_rules = ('-_password_hash', '-confirmation_pw', '-comments', 'videos', '-videos.comments', '-videos.user', 'unique_commented_vids', '-unique_commented_vids.comments', '-unique_commented_vids.user')
 
     id = db.Column(db.Integer, primary_key = True)
 

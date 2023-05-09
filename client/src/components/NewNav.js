@@ -37,7 +37,7 @@ function NewNav() {
             Search
           </Link>
           <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4 " to="/creator">
-            Content Creator Info
+            Letter to Creators
           </Link>
           <Link className="p-2 text-blue font-medium text-lg mx-6 hover:rounded-full hover:border-blue border-2 border-transparent px-4" to="/updates">
             Developer Updates

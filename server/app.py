@@ -7,6 +7,7 @@ from sqlalchemy import MetaData
 from models import db, User, Video, Comment
 from flask_bcrypt import Bcrypt
 import secrets 
+import json 
 
 
 
@@ -61,13 +62,15 @@ class Videos(Resource):
     def post(self):
         id = session['user_id']
         data = request.get_json()
-        new_vid = Video(
-            name = data['name'],
-            description = data['description'],
-            link = data['link'],
-            user_id = id
-        )
-
+        try: 
+            new_vid = Video(
+                name = data['name'],
+                description = data['description'],
+                link = data['link'],
+                user_id = id
+            )
+        except ValueError: 
+            return make_response({'error': 'please make it a youtube link'}, 409)
         db.session.add(new_vid)
         db.session.commit()
 
@@ -109,9 +112,8 @@ api.add_resource(Comments, '/comments')
 class VideobyID(Resource):
     def get(self, id):
         video = Video.query.filter(Video.id == id).first()
-        vid_obj = video.to_dict()
 
-        return make_response(vid_obj, 200)
+        return make_response(video.to_dict(), 200)
 
     def patch(self, id): 
         data = request.get_json()
