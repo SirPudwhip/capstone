@@ -46,12 +46,14 @@ function Profile() {
 
 
     return(
-        <div>
-            <p>{userData.username}</p>
-            <p> Here are a list of your videos you wily little rascal! : </p>
-            <Link className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+        <div className='min-h-screen bg-gradient-to-t from-blue to-charcoal-light to-40%'>
+            <div className=" pb-4 text-center text-blue text-xl font-semibold">
+            <p className="mb-4">{userData.username}</p>
+            <Link className="bg-blue text-charcoal-dark p-2 rounded-md text-xl hover:bg-orange"
             to='/postvideo'>Post New Video</Link>
-            <div className='grid grid-cols-5' >
+            <p className='mt-4'> Here are a list of your videos you wily little rascal! : </p>
+            </div>
+            <div className='grid grid-cols-6' >
                 {vidList}
             </div>
             <div className= "bg-light-gray">

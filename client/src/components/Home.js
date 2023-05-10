@@ -18,7 +18,7 @@ function Home () {
     })
     
     return(
-        <div className=' bg-fixed bg-gradient-to-t from-blue to-charcoal-light to-40% '>
+        <div className='min-h-screen bg-fixed bg-gradient-to-t from-blue to-charcoal-light to-40% '>
             <div className = 'grid grid-cols-3 mx-6 gap-8' >
                 {homeList}
             </div>

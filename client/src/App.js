@@ -12,6 +12,7 @@ import PostVideo from './components/PostVideo'
 import Search from './components/Search'
 import Creator from './components/Creator'
 import Updates from './components/Updates'
+import NewVid from './components/NewVid'
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -49,6 +50,7 @@ function App() {
             <Route path = '/postvideo' element={<PostVideo />} />
             <Route path ='/search/' element= {<Search />}/>
             <Route path ='/updates' element= {<Updates />}/>
+            <Route path='/newvid' element = {<NewVid />}/>
         </Routes>
     </div>
   );

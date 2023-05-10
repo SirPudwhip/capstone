@@ -3,6 +3,7 @@ from sqlalchemy.orm import validates
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+import re
 
 
 
@@ -46,15 +47,17 @@ class Video(db.Model, SerializerMixin):
 
     @validates('link')
     def check_link(self, key, link):
-        if 'youtube.com' in link: 
+        youtube_regex = r'^https?://(?:www\.)?youtube\.com/(?:watch\?(?=.*v=\w+)(?:\S+)?|embed/(?:\S+)|(\w+))$'
+        if re.match(youtube_regex, link):
             return link
-        raise ValueError('please include this as a YOUTUBE link')
+        raise ValueError('please use a youtube link')
 
     @validates('name')
-    def check_link(self, key, name):
-        if ['shit', 'fuck', 'damn', 'crap', 'hell'] in name: 
-            return link
-        raise ValueError('please no vulgarity')
+    def check_name(self, key, name):
+        banned_words = ['shit', 'fuck', 'damn', 'crap', 'hell']
+        if any (word in name for word in banned_words): 
+            raise ValueError('please no vulgarity')
+        return name
     
     
 

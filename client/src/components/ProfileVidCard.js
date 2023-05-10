@@ -15,6 +15,8 @@ function ProfileVidCard({video, changeProp}) {
         setShowMod(!showMod)
     }
 
+    console.log(cardName)
+
     let handleDel = (e) => {
         console.log('delete clicked')
 
@@ -73,7 +75,7 @@ function ProfileVidCard({video, changeProp}) {
     <div>
         {
             !showMod ? 
-            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+            <div className="text-blue overflow-hidden border border-blue max-w-4 max-h-25 rounded shadow-lg">
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{cardName}</div>
                     <p className="text-gray-700 text-base">
@@ -83,8 +85,10 @@ function ProfileVidCard({video, changeProp}) {
                         LINK: 
                         {cardLink}
                     </p>
-                    <button onClick={handleMod}className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"> modify </button>
-                    <button onClick={handleDel}className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-lightRed"> delete </button>
+                    <div className="flex">
+                    <button onClick={handleMod}className="block rounded-md bg-blue px-5 py-2.5 text-sm font-medium text-charcoal-dark transition hover:bg-teal-700"> modify </button>
+                    <button onClick={handleDel}className="block rounded-md bg-violet px-5 py-2.5 text-sm font-medium text-charcoal-dark transition hover:bg-lightRed"> delete </button>
+                    </div>
                 </div>
             </div>
 

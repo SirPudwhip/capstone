@@ -3,6 +3,8 @@ import ReactPlayer from 'react-player'
 import {useState, useEffect} from 'react'
 import VideoCard from './VideoCard'
 import ComObj from './ComObj'
+import "../App.css";
+import {useRef} from 'react'
 import {useSelector} from 'react-redux'
 
 
@@ -12,6 +14,34 @@ function Video() {
     const [video, setVideo] = useState({})
     const [formData, setFormData] = useState('')
     const [isHidden, setIsHidden] = useState(true)
+    const playerRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [played, setPlayed] = useState(0);
+    const [seeking, setSeeking] = useState(false);
+
+    const togglePlay = () => {
+    setIsPlaying((prevState) => !prevState)
+    };
+
+    const handleProgress = (progress) => {
+    if (!seeking){
+      setPlayed(progress.played);
+    }
+    };
+
+    const handleSeekMouseDown = () => {
+    setSeeking(true)
+    }
+
+    const handleSeekChange = (e) => {
+    const seekTime = parseFloat(e.target.value);
+    setPlayed(seekTime)
+    };
+
+    const handleSeekMouseUp = () => {
+    setSeeking(false)
+    playerRef.current.seekTo(played)
+    }
 
     const stateValue = useSelector(s => {
       return s
@@ -75,10 +105,29 @@ function Video() {
     }
 
     return (
-      <div className = 'h-screen bg-gradient-to-t from-blue to-charcoal-light to-40%'>
+      <div className = 'min-h-screen bg-gradient-to-t from-blue to-charcoal-light to-40%'>
         <div className='flex justify-center'>
-          <div className="text-center">
-            <ReactPlayer url={video.link}/>
+          <div className="text-center video">
+            <ReactPlayer    
+            ref={playerRef}
+            url={video.link}
+            playing={isPlaying}
+            onProgress={handleProgress}
+            />
+            <div className="flex controls">
+              <button className= "mr-2" onClick={togglePlay}>{isPlaying? 'Pause' : 'Play'}</button>
+              <input 
+              className = "w-full"
+              type='range'
+              min={0}
+              max={1}
+              step='any'
+              value={played}
+              onMouseDown={handleSeekMouseDown}
+              onMouseUp={handleSeekMouseUp}
+              onChange={handleSeekChange}
+              />
+            </div>
             <h1 className='font-bold text-xl text-blue'>{video.name}</h1>
             <button className="rounded-md bg-blue mt-2.5 px-5 py-2.5 font-medium text-white" onClick={handleShow}>show more</button>
             <div className = {isHidden? 'hidden' : ''}>
