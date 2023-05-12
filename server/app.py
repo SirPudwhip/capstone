@@ -137,6 +137,10 @@ class VideobyID(Resource):
             db.session.delete(video)
             db.session.commit()
 
+            for c in video.comments:
+                db.session.delete(c)
+                db.session.commit()
+
             response = make_response({}, 204)
 
         return response
